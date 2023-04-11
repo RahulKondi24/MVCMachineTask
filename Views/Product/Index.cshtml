@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MVCMachineTask.Models.Product>
+
+@{
+    ViewBag.Title = "Product Index";
+}
+
+<h2>Product Index</h2>
+@Html.ActionLink("Create New", "Create")
+<table class="table">
+    <tr>
+        <th></th>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            @foreach (var data in ViewBag.Categories)
+            {
+                if (item.CategoryId == @data.CategoryId)
+                {
+                <td>
+                    @data.CategoryName
+                </td>
+                }
+            }
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
+                @Html.ActionLink("Details", "ProductById", new { id = item.ProductId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+            </td>
+         </tr>
+      }
+</table>

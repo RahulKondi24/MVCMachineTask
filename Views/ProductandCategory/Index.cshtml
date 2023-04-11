@@ -1,0 +1,50 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<MVCMachineTask.Models.ProductandCategory>
+
+@{
+    ViewBag.Title = "ALLDATA";
+}
+<br />
+<h2>
+    Product & Category Data
+</h2>
+<br />
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ProductId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CategoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CategoryName)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="pagedList">
+    @Html.PagedListPager(Model, page => Url.Action("Index", "ProductandCategory", new { page, Search = Request.QueryString["Search"] }))
+</div>
